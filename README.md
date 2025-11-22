@@ -8,7 +8,7 @@ Diese Arbeit untersucht den Zusammenhang zwischen gesellschaftlichen Präferenze
 
 **BFS** Handel, Grenzgänger:innen, Bevölkerung; Öffentlich: [bfs.admin.ch](https://www.bfs.admin.ch)
 
-**fedlex**Amtliche Sammlung des Bundesrechts; Öffentlich: [fedlex.admin.ch](https://www.fedlex.admin.ch)
+**fedlex** Amtliche Sammlung des Bundesrechts; Öffentlich: [fedlex.admin.ch](https://www.fedlex.admin.ch)
 
 **Hinweis:** Die CSS-Rohdaten sind nicht öffentlich zugänglich.
 
