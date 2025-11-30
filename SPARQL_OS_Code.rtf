@@ -1,0 +1,32 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13620\viewh16520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 PREFIX jolux: <http://data.legilux.public.lu/resource/ontology/jolux#>\
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\
+\
+SELECT DISTINCT ?act ?date ?title ?fileUrl WHERE \{\
+  # Nur Amtliche Sammlung (oc): am sichersten \'fcber die URI-Form\
+  ?act a jolux:Act ;\
+       jolux:publicationDate ?date ;\
+       jolux:isRealizedBy ?expr .\
+  FILTER (STRSTARTS(STR(?act), "https://fedlex.data.admin.ch/eli/oc/"))\
+  FILTER (?date >= "2010-01-01"^^xsd:date && ?date <= "2025-12-31"^^xsd:date)\
+\
+  # Deutschsprachige Expression mit Titel\
+  ?expr jolux:language <http://publications.europa.eu/resource/authority/language/DEU> ;\
+        jolux:title ?title ;\
+        jolux:isEmbodiedBy ?manif .\
+\
+  # Manifestation \uc0\u8594  Datei-URL; zun\'e4chst auf PDF/A (optional umstellen auf html/xml/docx)\
+  ?manif jolux:userFormat <https://fedlex.data.admin.ch/vocabulary/user-format/pdf-a> ;\
+         jolux:isExemplifiedBy ?fileUrl .\
+\
+  # Typenheuristik \'fcber Titel (stabil in AS)\
+  FILTER (REGEX(STR(?title), "^(Verordnung|Bundesbeschluss)\\\\b", "i"))\
+\}\
+ORDER BY ?date\
+}
